@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
 project(robo-sep24)
 
-set(FREERTOS_PATH ${CMAKE_SOURCE_DIR}/lib/FreeRTOS)
+set(FREERTOS_PATH ${CMAKE_SOURCE_DIR}/libraries/FreeRTOS)
 set(INCLUDE_PATH ${CMAKE_SOURCE_DIR}/include)
 
 # Add the freertos_config for FreeRTOS-Kernel
@@ -66,9 +66,20 @@ target_compile_options(freertos_kernel PRIVATE
     $<$<COMPILE_LANG_AND_ID:C,Clang>:-Wno-covered-switch-default>
     $<$<COMPILE_LANG_AND_ID:C,Clang>:-Wno-cast-align> )
 
-file(GLOB_RECURSE SOURCES "src/*.c")
+add_subdirectory(common)
+add_subdirectory(planner)
+add_subdirectory(com-if)
+add_subdirectory(kernel)
+
+file(GLOB_RECURSE SOURCES "src/*.cpp")
+include_directories(${CMAKE_SOURCE_DIR}/include)
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-target_link_libraries(${PROJECT_NAME} freertos_kernel freertos_config)
+target_link_libraries(${PROJECT_NAME} 
+    freertos_kernel
+    freertos_config
+    common
+    planner
+    kernel)
 
 set_property(TARGET freertos_kernel PROPERTY C_STANDARD 90)

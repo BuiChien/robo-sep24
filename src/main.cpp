@@ -1,17 +1,10 @@
-#include <FreeRTOS.h>
-#include <task.h>
-#include <queue.h>
-#include <timers.h>
-#include <semphr.h>
-
-/* Standard includes. */
-#include <stdio.h>
+#include <Global.hpp>
+#include "Kernel.hpp"
 
 void main( void )
 {
-    /* Start the scheduler. */
-    vTaskStartScheduler();
-
+    KernelInit();
+    
     for( ; ; )
     {
         /* Should not reach here. */
