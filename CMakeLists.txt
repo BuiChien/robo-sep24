@@ -70,6 +70,7 @@ add_subdirectory(common)
 add_subdirectory(planner)
 add_subdirectory(com-if)
 add_subdirectory(kernel)
+add_subdirectory(motor)
 
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 include_directories(${CMAKE_SOURCE_DIR}/include)
@@ -80,6 +81,7 @@ target_link_libraries(${PROJECT_NAME}
     freertos_config
     common
     planner
-    kernel)
+    kernel
+    motor)
 
 set_property(TARGET freertos_kernel PROPERTY C_STANDARD 90)

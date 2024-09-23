@@ -1,6 +1,10 @@
 #include <Global.hpp>
 #include "Kernel.hpp"
 
+int32_t sys_position[N_AXIS];      // Real-time machine (aka home) position vector in steps.
+system_t sys;
+settings_t settings;
+
 void main( void )
 {
     KernelInit();
